@@ -153,9 +153,9 @@ to the current one.\n\
         filepicker.setKey('AzwGUd1rwTluEobUbYS81z');
         item.addEventListener("onSelect", function() {
             filepicker.getFile("*/*", {"modal":true}, function(url, metadata) {
+                var buf = ymacs.getBuffer(metadata.filename) || ymacs.createBuffer({ name: metadata.filename });
                 buf.setCode("Loading "+metadata.filename+" ...");
                 filepicker.getContents(url, function(code){
-                    var buf = ymacs.getBuffer(metadata.filename) || ymacs.createBuffer({ name: metadata.filename });
                     buf.setCode(code);
                     buf.cmd("javascript_dl_mode", true);
                     ymacs.switchToBuffer(buf);
