@@ -1070,8 +1070,26 @@ Ymacs_Buffer.newCommands({
                         this.cmd("insert", " ", cstart.ch, " ");
                         this.cmd("indent_line");
                 }
-        })
+        }),
 
+        //Filepicker_commands
+
+        open_file: Ymacs_Interactive(function() {
+            filepicker.getFile("*/*", {"modal":true}, function(url, metadata) {
+                filepicker.getContents(url, function(code){
+                    this.setCode(code);
+                    buf.cmd("javascript_dl_mode", true);
+                });
+            });
+        }),
+
+        save_file: Ymacs_Interactive(function() {
+            filepicker.getUrlFromData(this.getCode(), function(url) {
+                filepicker.saveAs(url, "*/*", {"modal":true}, function(){
+                    alert("File saved");
+                });
+            });
+        })
 });
 
 /* -----[ rectangle functions (vertical editing) ]----- */

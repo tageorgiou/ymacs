@@ -229,7 +229,12 @@ DEFINE_SINGLETON("Ymacs_Keymap_Emacs", Ymacs_Keymap, function(D, P){
                                 size    : this.getCodeSize(),
                                 sizeKB  : this.getCodeSize().formatBytes(2)
                         }), true);
-                }
+                },
+
+                // save file
+                "C-x C-f"                                   : "open_file",
+                "C-x C-s"                                   : "save_file"
+
         };
 
         P.defaultHandler = [ "self_insert_command" ];
