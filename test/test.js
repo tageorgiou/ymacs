@@ -161,11 +161,16 @@ to the current one.\n\
             });
         });
 
-        var item = new DlMenuItem({ parent: menu, label: "Save file".makeLabel() });
+        item = new DlMenuItem({ parent: menu, label: "Save file".makeLabel() });
         item.addEventListener("onSelect", function() {
+            filepicker.getUrlFromData(ymacs.getActiveBuffer().getCode(), function(url) {
+                filepicker.saveAs(url, "*/*", {"modal":true}, function(){
+                    alert("File saved");
+                });
+            });
         });
 
-        var item = new DlMenuItem({ parent: menu, label: "Load its own code!".makeLabel() });
+        item = new DlMenuItem({ parent: menu, label: "Load its own code!".makeLabel() });
 
         var files = [
                 "ymacs.js",
