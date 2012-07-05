@@ -148,6 +148,23 @@ to the current one.\n\
         var menu = new DlHMenu({});
         menu.setStyle({ marginLeft: 0, marginRight: 0 });
 
+        var item = new DlMenuItem({ parent: menu, label: "Open a file".makeLabel() });
+        filepicker.setKey('AzwGUd1rwTluEobUbYS81z');
+        item.addEventListener("onSelect", function() {
+            filepicker.getFile("*/*", {"modal":true}, function(url, metadata) {
+                filepicker.getContents(url, function(code){
+                    var buf = ymacs.getBuffer(metadata.filename) || ymacs.createBuffer({ name: metadata.filename });
+                    buf.setCode(code);
+                    buf.cmd("javascript_dl_mode", true);
+                    ymacs.switchToBuffer(buf);
+                });
+            });
+        });
+
+        var item = new DlMenuItem({ parent: menu, label: "Save file".makeLabel() });
+        item.addEventListener("onSelect", function() {
+        });
+
         var item = new DlMenuItem({ parent: menu, label: "Load its own code!".makeLabel() });
 
         var files = [
