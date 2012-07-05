@@ -155,19 +155,20 @@ to the current one.\n\
             filepicker.getFile("*/*", {"modal":true}, function(url, metadata) {
                 var buf = ymacs.getBuffer(metadata.filename) || ymacs.createBuffer({ name: metadata.filename });
                 buf.setCode("Loading "+metadata.filename+" ...");
+                ymacs.switchToBuffer(buf);
                 filepicker.getContents(url, function(code){
                     buf.setCode(code);
                     buf.cmd("javascript_dl_mode", true);
-                    ymacs.switchToBuffer(buf);
                 });
             });
         });
 
         item = new DlMenuItem({ parent: menu, label: "Save file".makeLabel() });
         item.addEventListener("onSelect", function() {
-            filepicker.getUrlFromData(ymacs.getActiveBuffer().getCode(), function(url) {
+            var buf = ymacs.getActiveBuffer();
+            filepicker.getUrlFromData(buf.getCode(), function(url) {
                 filepicker.saveAs(url, "*/*", {"modal":true}, function(){
-                    alert("File saved");
+                    buf.signalInfo("File saved");
                 });
             });
         });

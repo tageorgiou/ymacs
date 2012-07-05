@@ -1074,7 +1074,7 @@ Ymacs_Buffer.newCommands({
 
         //Filepicker_commands
 
-        open_file: Ymacs_Interactive(function() {
+        fp_open_file: Ymacs_Interactive(function() {
             var buf = this;
             filepicker.getFile("*/*", {"modal":true}, function(url, metadata) {
                 buf.setCode("Loading "+metadata.filename+" ...");
@@ -1085,7 +1085,7 @@ Ymacs_Buffer.newCommands({
             });
         }),
 
-        save_file: Ymacs_Interactive(function() {
+        fp_save_file: Ymacs_Interactive(function() {
             filepicker.getUrlFromData(this.getCode(), function(url) {
                 filepicker.saveAs(url, "*/*", {"modal":true}, function(){
                     alert("File saved");

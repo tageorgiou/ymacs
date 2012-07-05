@@ -232,8 +232,8 @@ DEFINE_SINGLETON("Ymacs_Keymap_Emacs", Ymacs_Keymap, function(D, P){
                 },
 
                 // save file
-                "C-x C-f"                                   : "open_file",
-                "C-x C-s"                                   : "save_file"
+                "C-x C-f"                                   : "fp_open_file",
+                "C-x C-s"                                   : "fp_save_file"
 
         };
 
